@@ -1,5 +1,5 @@
 
-package remoteclient;
+package Client;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
