@@ -1,4 +1,4 @@
-package remoteclient;
+package client;
 
 import java.awt.Rectangle;
 import java.awt.Robot;
