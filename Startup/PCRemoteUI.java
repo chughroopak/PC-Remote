@@ -50,10 +50,10 @@ public class PCRemoteUI extends javax.swing.JFrame {
         jButton2.setAlignmentX(25.0F);
         jButton2.setAlignmentY(25.0F);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/pcremote/img/server.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/server.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/my/pcremote/img/client.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/client.png"))); // NOI18N
 
         jButton3.setText("SERVER");
 
