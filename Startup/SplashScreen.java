@@ -38,10 +38,6 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
                 ex.printStackTrace();
             }
         }
-        /*
-            Code to open Login Screen
-            is to be written here
-        */
     }
 
     public SplashScreen() throws InterruptedException {
