@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Startup;
 
 import Server.ServerInit;
 
-/**
- *
- * @author dell pc
- */
 public class PCRemoteUI extends javax.swing.JFrame {
 
     /**
