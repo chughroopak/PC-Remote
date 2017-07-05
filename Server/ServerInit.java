@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Server;
 
 /**
@@ -55,7 +50,7 @@ public class ServerInit extends javax.swing.JFrame {
             while(true){
                 Socket client = sc.accept();
                 System.out.println("New client Connected to the server");
-                
+                //Client verification code is to be written here
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -71,7 +66,7 @@ public class ServerInit extends javax.swing.JFrame {
             while (e.hasMoreElements()) {
                  NetworkInterface iface = e.nextElement();
                 if (iface.isLoopback() || !iface.isUp() || iface.isVirtual() || iface.isPointToPoint())
-            continue;
+                    continue;
                 Enumeration<InetAddress> e2 = iface.getInetAddresses();
                 for (InetAddress address : Collections.list(iface.getInetAddresses())) {
                     if (address instanceof Inet4Address) {
