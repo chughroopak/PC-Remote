@@ -1,6 +1,11 @@
+package Startup;
 
+
+import Startup.PCRemoteUI;
 import java.awt.Color;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SplashScreen extends javax.swing.JFrame implements Runnable {
 
@@ -18,6 +23,9 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
             value++;
             progressBar.setValue(value);
             if (value == 100) {
+                this.dispose();
+                PCRemoteUI pr = new PCRemoteUI();
+                pr.setVisible(true);
                 break;
             }
             try {
@@ -30,18 +38,15 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
                 ex.printStackTrace();
             }
         }
-        /*
-            Code to open Login Screen
-            is to be written here
-        */
     }
 
-    public SplashScreen() {
+    public SplashScreen() throws InterruptedException {
         initComponents();
         getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
         progressBar.setForeground(Color.BLACK);
-        new Thread(this).start();
+        Thread th = new Thread(this);
+        th.start();
     }
 
     /**
@@ -61,7 +66,7 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
         setUndecorated(true);
         setResizable(false);
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/splashscreen.png"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("./splashscreen.png"))); // NOI18N
 
         progressBar.setBackground(new java.awt.Color(255, 255, 255));
         progressBar.setBorderPainted(false);
@@ -115,7 +120,11 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SplashScreen().setVisible(true);
+                try {
+                    new SplashScreen().setVisible(true);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SplashScreen.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
