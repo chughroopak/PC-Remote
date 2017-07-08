@@ -38,6 +38,10 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
                 ex.printStackTrace();
             }
         }
+        /*
+            Code to open Login Screen
+            is to be written here
+        */
     }
 
     public SplashScreen() throws InterruptedException {
@@ -66,7 +70,7 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
         setUndecorated(true);
         setResizable(false);
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("./splashscreen.png"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/splashscreen.png"))); // NOI18N
 
         progressBar.setBackground(new java.awt.Color(255, 255, 255));
         progressBar.setBorderPainted(false);

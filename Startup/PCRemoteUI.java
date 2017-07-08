@@ -1,7 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Startup;
 
+import Client.ClientInit;
 import Server.ServerInit;
 
+/**
+ *
+ * @author dell pc
+ */
 public class PCRemoteUI extends javax.swing.JFrame {
 
     /**
@@ -42,11 +52,16 @@ public class PCRemoteUI extends javax.swing.JFrame {
         jButton2.setText("CLIENT");
         jButton2.setAlignmentX(25.0F);
         jButton2.setAlignmentY(25.0F);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("./img/server.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/server.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("./img/client.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/client.png"))); // NOI18N
 
         jButton3.setText("SERVER");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +120,14 @@ public class PCRemoteUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     ServerInit si = new ServerInit();
     si.setVisible(true);// TODO add your handling code here:
+    this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    ClientInit ci = new ClientInit();
+    ci.setVisible(true);// TODO add your handling code here:
+    this.dispose();   // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

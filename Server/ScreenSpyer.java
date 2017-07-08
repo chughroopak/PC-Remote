@@ -1,5 +1,6 @@
-package client;
+package Server;
 
+import Client.*;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferedImage;
@@ -53,5 +54,4 @@ class ScreenSpyer extends Thread {
         }
 
     }
-
 }

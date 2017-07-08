@@ -1,7 +1,8 @@
 
-package Client;
+package Server;
 
 import java.awt.AWTException;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -10,53 +11,64 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 
-public class ClientInitiator {
+/**
+ *
+ * @author Halim
+ */
+class ServerHandler extends Thread {
 
-    Socket sc = null;
-
-    public static void main(String[] args){
-        String server_ip = JOptionPane.showInputDialog("Please Enter Server IP");
-        String server_port = JOptionPane.showInputDialog("Please Enter Server Port");
-        new ClientInitiator().initialize(server_ip, Integer.parseInt(server_port));
+    private ServerSocket sc = null;
+    private Socket client = null;
+    private int port;
+    public ServerHandler(int port) {
+        this.port=port;
+        start();
     }
 
-    public void initialize(String server_ip, int server_port ){
-
+    public void run(){
         Robot robot = null;
         Rectangle rect = null;
 
         try {
             System.out.println("Connecting to server......");
-            sc = new Socket(server_ip, server_port);
+            sc = new ServerSocket(port);
+            int clients = 0;
+            while(clients==0){
+                client = sc.accept();
+                System.out.println("New client Connected to the server");
+                clients++;
+            }
             System.out.println("Connection Established.");
-
             GraphicsEnvironment gEnv=GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice gd=gEnv.getDefaultScreenDevice();
-
             Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();
             rect = new Rectangle(dimen);
-
             robot = new Robot(gd);
-
             drawGUI();
-            new ScreenSpyer(sc,robot,rect);
-            new ServerDelegate(sc,robot);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            new ScreenSpyer(client,robot,rect);
+            new ServerDriver(client,robot);
         } catch (AWTException e) {
                 e.printStackTrace();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
-
+    
     private void drawGUI() {
         JFrame jframe = new JFrame("Remote Administrator");
         JButton btn= new JButton("Terminate");
