@@ -1,12 +1,7 @@
 
-/*
- * Author Ahmed Abdelhalim - 2009
- * Email: englemo@hotmail.com
- * Please do not remove the above lines
- */
 package Client;
 
-/**
+/*
  * Used to represent commands which can be sent by the server
  */
 public enum EnumCommands {
