@@ -4,15 +4,11 @@ package Server;
  *
  * @author ROOPAK CHUGH
  */
-import java.awt.List;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,10 +22,12 @@ public class ServerInit extends javax.swing.JFrame {
     /**
      * Creates new form ServerInit
      */
+    int port;
+    ServerHandler handler;
     public ServerInit() {
         initComponents();
         String ip = new String();
-        int port = 2500;
+        port = 2500;
         try {
             ip = getLocalHostAddresses();
         } catch (Exception ex) {
@@ -38,23 +36,11 @@ public class ServerInit extends javax.swing.JFrame {
         ipfield.setText(ip);
         portfield.setText("2500");
         passfield.setText(""+((int)(Math.random()*9000)+1000));
-        initialize(port);
+        handler = new ServerHandler(port);
     }
     
-    
-    public void initialize(int port){
-
-        try {
-            ServerSocket sc = new ServerSocket(port);
-            //Listen to server port and accept clients connections
-            while(true){
-                Socket client = sc.accept();
-                System.out.println("New client Connected to the server");
-                //Client verification code is to be written here
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public int getPort(){
+        return port;
     }
     
     public String getLocalHostAddresses() {
@@ -66,7 +52,7 @@ public class ServerInit extends javax.swing.JFrame {
             while (e.hasMoreElements()) {
                  NetworkInterface iface = e.nextElement();
                 if (iface.isLoopback() || !iface.isUp() || iface.isVirtual() || iface.isPointToPoint())
-                    continue;
+            continue;
                 Enumeration<InetAddress> e2 = iface.getInetAddresses();
                 for (InetAddress address : Collections.list(iface.getInetAddresses())) {
                     if (address instanceof Inet4Address) {
@@ -174,6 +160,11 @@ public class ServerInit extends javax.swing.JFrame {
         jLabel6.setText("Use above information to login from client");
 
         jButton1.setText("Update Port");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,6 +229,10 @@ public class ServerInit extends javax.swing.JFrame {
     private void portfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_portfieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
