@@ -1,8 +1,3 @@
-/*
- * Author Ahmed Abdelhalim - 2009
- * Email: englemo@hotmail.com
- * Please do not remove the above lines
- */
 package Client;
 
 import java.awt.Graphics;
@@ -12,11 +7,6 @@ import java.io.ObjectInputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-/**
- * @author Halim
- * ClientScreenReciever is responsible for recieving client screenshot and displaying
- * it in the server. Each connected client has a separate object of this class
- */
 class ClientScreenReciever extends Thread {
 
     private ObjectInputStream cObjectInputStream = null;
