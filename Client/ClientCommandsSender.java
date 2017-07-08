@@ -1,9 +1,3 @@
-/*
- * Author Ahmed Abdelhalim - 2009
- * Email: englemo@hotmail.com
- * Please do not remove the above lines
- */
-
 package Client;
 
 import java.awt.Rectangle;
@@ -17,9 +11,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import javax.swing.JPanel;
 
-/**
- * @author Halim
- */
 class ClientCommandsSender implements KeyListener,
         MouseMotionListener,MouseListener {
 
