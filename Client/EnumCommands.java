@@ -1,7 +1,6 @@
-
 package Client;
 
-/*
+/**
  * Used to represent commands which can be sent by the server
  */
 public enum EnumCommands {
@@ -13,11 +12,11 @@ public enum EnumCommands {
 
     private int abbrev;
 
-    EnumCommands(int abbrev){
+    EnumCommands(int abbrev) {
         this.abbrev = abbrev;
     }
 
-    public int getAbbrev(){
+    public int getAbbrev() {
         return abbrev;
     }
 }

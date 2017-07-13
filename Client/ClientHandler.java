@@ -5,44 +5,40 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
-/**
- *
- * @author ROOPAK CHUGH
- */
 public class ClientHandler extends javax.swing.JFrame {
 
     /**
      * Creates new form ClientHandler
      */
     Socket cSocket;
-    
+
     public ClientHandler(Socket cSocket) {
         initComponents();
-        this.cSocket=cSocket;
+        this.cSocket = cSocket;
         run();
     }
 
-    public void run(){
-     //used to represent client screen size
+    public void run() {
+        //used to represent client screen size
         Rectangle clientScreenDim = null;
         //Used to read screenshots and client screen dimension
         System.out.println("In Thread");
         ObjectInputStream ois = null;
-        try{
+        try {
             //Read client screen dimension
             ois = new ObjectInputStream(cSocket.getInputStream());
-            clientScreenDim =(Rectangle) ois.readObject();
-        }catch(IOException ex){
+            clientScreenDim = (Rectangle) ois.readObject();
+        } catch (IOException ex) {
             ex.printStackTrace();
-        }catch(ClassNotFoundException ex){
+        } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         //Start recieveing screenshots
-        new ClientScreenReciever(ois,cPanel);
+        new ClientScreenReciever(ois, cPanel);
         //Start sending events to the client
-        new ClientCommandsSender(cSocket,cPanel,clientScreenDim);   
+        new ClientCommandsSender(cSocket, cPanel, clientScreenDim);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

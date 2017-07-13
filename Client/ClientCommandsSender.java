@@ -12,7 +12,7 @@ import java.net.Socket;
 import javax.swing.JPanel;
 
 class ClientCommandsSender implements KeyListener,
-        MouseMotionListener,MouseListener {
+        MouseMotionListener, MouseListener {
 
     private Socket cSocket = null;
     private JPanel cPanel = null;
@@ -28,37 +28,41 @@ class ClientCommandsSender implements KeyListener,
         cPanel.addMouseListener(this);
         cPanel.addMouseMotionListener(this);
         try {
-             //Prepare PrintWriter which will be used to send commands to
-             //the client
+            //Prepare PrintWriter which will be used to send commands to
+            //the client
             writer = new PrintWriter(cSocket.getOutputStream());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+
     }
 
     //Not implemeted yet
+    @Override
     public void mouseDragged(MouseEvent e) {
     }
 
+    @Override
     public void mouseMoved(MouseEvent e) {
-        double xScale = clientScreenDim.getWidth()/cPanel.getWidth();
-        System.out.println("xScale: " + xScale);
-        double yScale = clientScreenDim.getHeight()/cPanel.getHeight();
-        System.out.println("yScale: " + yScale);
-        System.out.println("Mouse Moved");
+        double xScale = clientScreenDim.getWidth() / cPanel.getWidth();
+        //System.out.println("xScale: " + xScale);
+        double yScale = clientScreenDim.getHeight() / cPanel.getHeight();
+        //System.out.println("yScale: " + yScale);
+        //System.out.println("Mouse Moved");
         writer.println(EnumCommands.MOVE_MOUSE.getAbbrev());
-        writer.println((int)(e.getX() * xScale));
-        writer.println((int)(e.getY() * yScale));
+        writer.println((int) (e.getX() * xScale));
+        writer.println((int) (e.getY() * yScale));
         writer.flush();
     }
 
     //this is not implemented
+    @Override
     public void mouseClicked(MouseEvent e) {
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("Mouse Pressed");
+        //System.out.println("Mouse Pressed");
         writer.println(EnumCommands.PRESS_MOUSE.getAbbrev());
         int button = e.getButton();
         int xButton = 16;
@@ -69,8 +73,9 @@ class ClientCommandsSender implements KeyListener,
         writer.flush();
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("Mouse Released");
+        //System.out.println("Mouse Released");
         writer.println(EnumCommands.RELEASE_MOUSE.getAbbrev());
         int button = e.getButton();
         int xButton = 16;
@@ -82,27 +87,32 @@ class ClientCommandsSender implements KeyListener,
     }
 
     //not implemented
+    @Override
     public void mouseEntered(MouseEvent e) {
     }
 
     //not implemented
+    @Override
     public void mouseExited(MouseEvent e) {
 
     }
 
     //not implemented
+    @Override
     public void keyTyped(KeyEvent e) {
     }
 
+    @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Key Pressed");
+        //System.out.println("Key Pressed");
         writer.println(EnumCommands.PRESS_KEY.getAbbrev());
         writer.println(e.getKeyCode());
         writer.flush();
     }
 
+    @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("Mouse Released");
+        //System.out.println("Mouse Released");
         writer.println(EnumCommands.RELEASE_KEY.getAbbrev());
         writer.println(e.getKeyCode());
         writer.flush();
