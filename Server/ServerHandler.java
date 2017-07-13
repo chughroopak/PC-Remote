@@ -1,8 +1,6 @@
-
 package Server;
 
 import java.awt.AWTException;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -11,78 +9,98 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
 
-/**
- *
- * @author Halim
- */
 class ServerHandler extends Thread {
 
     private ServerSocket sc = null;
     private Socket client = null;
     private int port;
-    public ServerHandler(int port) {
-        this.port=port;
+    DataInputStream dIn;
+    DataOutputStream dOut;
+    boolean receive = true;
+    int pass;
+    String pswd;
+
+    public ServerHandler(int port, int pass) {
+        this.port = port;
+        this.pass = pass;
         start();
     }
 
-    public void run(){
+    @Override
+    public void run() {
         Robot robot = null;
         Rectangle rect = null;
 
         try {
-            System.out.println("Connecting to server......");
+            //System.out.println("Connecting to server......");
             sc = new ServerSocket(port);
             int clients = 0;
-            while(clients==0){
+            while (clients == 0) {
                 client = sc.accept();
-                System.out.println("New client Connected to the server");
                 clients++;
             }
-            System.out.println("Connection Established.");
-            GraphicsEnvironment gEnv=GraphicsEnvironment.getLocalGraphicsEnvironment();
-            GraphicsDevice gd=gEnv.getDefaultScreenDevice();
+            // Check whether password is correct or not
+            dIn = new DataInputStream(client.getInputStream());
+            dOut = new DataOutputStream(client.getOutputStream());// Send response back to authenticate
+            while (receive) {
+                byte type = dIn.readByte();
+                if (type == 1) {
+                    pswd = dIn.readUTF();
+                    //System.out.println(pswd);
+                    if (pswd.equals(String.valueOf(pass))) {
+                        //System.out.println("password correct");
+                        dOut.writeByte(1);
+                        dOut.flush();
+                        receive = false;
+                    }
+                    else{
+                        dOut.writeByte(2);
+                        dOut.flush();
+                    }
+                }
+            }
+            dIn.close();
+            dOut.close();
+            client = sc.accept();
+            //System.out.println("Connection Established.");
+            GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice gd = gEnv.getDefaultScreenDevice();
             Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();
             rect = new Rectangle(dimen);
             robot = new Robot(gd);
             drawGUI();
-            new ScreenSpyer(client,robot,rect);
-            new ServerDriver(client,robot);
+            new ScreenSpyer(client, robot, rect);
+            new ServerDriver(client, robot);
         } catch (AWTException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         } catch (IOException ex) {
-            Logger.getLogger(ServerHandler.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
-        
     }
-    
+
     private void drawGUI() {
         JFrame jframe = new JFrame("Remote Administrator");
-        JButton btn= new JButton("Terminate");
-        
-        jframe.setBounds(100,100,150,150);
+        JButton btn = new JButton("Terminate");
+
+        jframe.setBounds(100, 100, 150, 150);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(btn);
-        btn.addActionListener( new ActionListener() {
+        btn.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         }
-      );
-      jframe.setVisible(true);
+        );
+        jframe.setVisible(true);
     }
 }

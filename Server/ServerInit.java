@@ -1,9 +1,5 @@
 package Server;
 
-/**
- *
- * @author ROOPAK CHUGH
- */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Inet4Address;
@@ -16,16 +12,19 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class ServerInit extends javax.swing.JFrame {
+public final class ServerInit extends javax.swing.JFrame {
 
     /**
      * Creates new form ServerInit
      */
     int port;
+    private int pass;
     ServerHandler handler;
+
     public ServerInit() {
         initComponents();
+        setLocationRelativeTo(null);
+        pass = 1000 + (int) (Math.random() * 9000);
         String ip = new String();
         port = 2500;
         try {
@@ -35,42 +34,42 @@ public class ServerInit extends javax.swing.JFrame {
         }
         ipfield.setText(ip);
         portfield.setText("2500");
-        passfield.setText(""+((int)(Math.random()*9000)+1000));
-        handler = new ServerHandler(port);
+        passfield.setText(String.valueOf(pass));
+        handler = new ServerHandler(port,pass);
     }
-    
-    public int getPort(){
+
+    public int getPort() {
         return port;
     }
-    
+
     public String getLocalHostAddresses() {
-        ArrayList<String> addresses = new ArrayList<String>();
-        System.setProperty("java.net.preferIPv4Stack" , "true");
-        
+        ArrayList<String> addresses = new ArrayList<>();
+        System.setProperty("java.net.preferIPv4Stack", "true");
+
         try {
             Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
             while (e.hasMoreElements()) {
-                 NetworkInterface iface = e.nextElement();
-                if (iface.isLoopback() || !iface.isUp() || iface.isVirtual() || iface.isPointToPoint())
-            continue;
+                NetworkInterface iface = e.nextElement();
+                if (iface.isLoopback() || !iface.isUp() || iface.isVirtual() || iface.isPointToPoint()) {
+                    continue;
+                }
                 Enumeration<InetAddress> e2 = iface.getInetAddresses();
                 for (InetAddress address : Collections.list(iface.getInetAddresses())) {
                     if (address instanceof Inet4Address) {
-                        addresses.add(iface.getName()+address.toString());
-                    }   
+                        addresses.add(iface.getName() + address.toString());
+                    }
                 }
-                }
+            }
             URL u = new URL("http://checkip.amazonaws.com/");
             BufferedReader in = new BufferedReader(new InputStreamReader(
-                u.openStream()));
-            addresses.add("InternetIP/"+in.readLine());
+                    u.openStream()));
+            addresses.add("InternetIP/" + in.readLine());
             in.close();
         } catch (Exception ignore) {
-        System.out.println(ignore);
+            System.out.println(ignore);
         }
         StringBuilder sb = new StringBuilder();
-        for (String s : addresses)
-        {
+        for (String s : addresses) {
             sb.append(s);
             sb.append("\n");
         }
