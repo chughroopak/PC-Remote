@@ -40,7 +40,7 @@ class ServerHandler extends Thread {
         Rectangle rect = null;
 
         try {
-            //System.out.println("Connecting to server......");
+            System.out.println("Connecting to server......");
             sc = new ServerSocket(port);
             int clients = 0;
             while (clients == 0) {
@@ -54,9 +54,7 @@ class ServerHandler extends Thread {
                 byte type = dIn.readByte();
                 if (type == 1) {
                     pswd = dIn.readUTF();
-                    //System.out.println(pswd);
                     if (pswd.equals(String.valueOf(pass))) {
-                        //System.out.println("password correct");
                         dOut.writeByte(1);
                         dOut.flush();
                         receive = false;
@@ -70,7 +68,7 @@ class ServerHandler extends Thread {
             dIn.close();
             dOut.close();
             client = sc.accept();
-            //System.out.println("Connection Established.");
+            System.out.println("Connection Established.");
             GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice gd = gEnv.getDefaultScreenDevice();
             Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();

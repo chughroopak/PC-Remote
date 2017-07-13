@@ -38,10 +38,10 @@ class ScreenSpyer extends Thread {
             ImageIcon imageIcon = new ImageIcon(image);
 
             try {
-                //System.out.println("before sending image");
+                System.out.println("before sending image");
                 oos.writeObject(imageIcon);
                 oos.reset();
-                //System.out.println("New screenshot sent");
+                System.out.println("New screenshot sent");
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

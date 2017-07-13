@@ -21,13 +21,13 @@ class ServerDriver extends Thread {
     public void run() {
         Scanner scanner = null;
         try {
-            //System.out.println("Starting InStream");
+            System.out.println("Starting InStream");
             scanner = new Scanner(socket.getInputStream());
 
             while (loop) {
-                //System.out.println("Waiting...");
+                System.out.println("Waiting...");
                 int command = scanner.nextInt();
-                //System.out.println("New command: " + command);
+                System.out.println("New command: " + command);
                 switch (command) {
                     case 1:
                         robot.mousePress(scanner.nextInt());
