@@ -28,7 +28,6 @@ public class ClientInit extends javax.swing.JFrame {
         try {
             System.out.println("Connecting to server......");
             sc = new Socket(server_ip, server_port);
-            //sc.getOutputStream().write("asb".getBytes("UTF-8"));
             System.out.println("Connection Established.");
             ClientHandler ch = new ClientHandler(sc);
             ch.setVisible(true);
@@ -170,7 +169,6 @@ public class ClientInit extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         PCRemoteUI pc = new PCRemoteUI();
         pc.setVisible(true);
-        //authenticate("cancel");
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -194,7 +192,7 @@ public class ClientInit extends javax.swing.JFrame {
         try {
             sc = new Socket(ipfield.getText(), Integer.parseInt(portfield.getText()));
             String s = passfield.getText();
-            //Send passfield data to server
+            // Send passfield data to server
             dOut = new DataOutputStream(sc.getOutputStream());
             dIn = new DataInputStream(sc.getInputStream()); // To receive whether password is right or not
             if (btn.equals("connect")) {

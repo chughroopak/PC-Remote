@@ -45,10 +45,10 @@ class ClientCommandsSender implements KeyListener,
     @Override
     public void mouseMoved(MouseEvent e) {
         double xScale = clientScreenDim.getWidth() / cPanel.getWidth();
-        //System.out.println("xScale: " + xScale);
+        System.out.println("xScale: " + xScale);
         double yScale = clientScreenDim.getHeight() / cPanel.getHeight();
-        //System.out.println("yScale: " + yScale);
-        //System.out.println("Mouse Moved");
+        System.out.println("yScale: " + yScale);
+        System.out.println("Mouse Moved");
         writer.println(EnumCommands.MOVE_MOUSE.getAbbrev());
         writer.println((int) (e.getX() * xScale));
         writer.println((int) (e.getY() * yScale));
@@ -62,7 +62,7 @@ class ClientCommandsSender implements KeyListener,
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //System.out.println("Mouse Pressed");
+        System.out.println("Mouse Pressed");
         writer.println(EnumCommands.PRESS_MOUSE.getAbbrev());
         int button = e.getButton();
         int xButton = 16;
@@ -75,7 +75,7 @@ class ClientCommandsSender implements KeyListener,
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //System.out.println("Mouse Released");
+        System.out.println("Mouse Released");
         writer.println(EnumCommands.RELEASE_MOUSE.getAbbrev());
         int button = e.getButton();
         int xButton = 16;
@@ -104,7 +104,7 @@ class ClientCommandsSender implements KeyListener,
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //System.out.println("Key Pressed");
+        System.out.println("Key Pressed");
         writer.println(EnumCommands.PRESS_KEY.getAbbrev());
         writer.println(e.getKeyCode());
         writer.flush();
@@ -112,7 +112,7 @@ class ClientCommandsSender implements KeyListener,
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //System.out.println("Mouse Released");
+        System.out.println("Mouse Released");
         writer.println(EnumCommands.RELEASE_KEY.getAbbrev());
         writer.println(e.getKeyCode());
         writer.flush();
