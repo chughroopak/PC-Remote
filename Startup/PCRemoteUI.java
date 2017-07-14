@@ -9,16 +9,18 @@ public class PCRemoteUI extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        clientBtn = new javax.swing.JButton();
+        serverLabel = new javax.swing.JLabel();
+        clientLabel = new javax.swing.JLabel();
+        serverBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PC Remote");
@@ -33,25 +35,35 @@ public class PCRemoteUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
         jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
-        jButton2.setText("CLIENT");
-        jButton2.setAlignmentX(25.0F);
-        jButton2.setAlignmentY(25.0F);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        clientBtn.setText("CLIENT");
+        clientBtn.setAlignmentX(25.0F);
+        clientBtn.setAlignmentY(25.0F);
+        clientBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                clientBtnActionPerformed(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Startup/img/server.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        serverLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Startup/img/server.png"))); // NOI18N
+        serverLabel.setText("jLabel1");
+        serverLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                serverLabelMouseClicked(evt);
+            }
+        });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Startup/img/client.png"))); // NOI18N
-        jLabel2.setText("b");
+        clientLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Startup/img/client.png"))); // NOI18N
+        clientLabel.setText("b");
+        clientLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clientLabelMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("SERVER");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        serverBtn.setText("SERVER");
+        serverBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                serverBtnActionPerformed(evt);
             }
         });
 
@@ -61,15 +73,15 @@ public class PCRemoteUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(jButton3)
+                .addComponent(serverBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(clientBtn)
                 .addGap(75, 75, 75))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(serverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(clientLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
@@ -77,12 +89,12 @@ public class PCRemoteUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(80, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(serverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clientLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(clientBtn)
+                    .addComponent(serverBtn))
                 .addGap(67, 67, 67))
         );
 
@@ -102,17 +114,25 @@ public class PCRemoteUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void serverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverBtnActionPerformed
         ServerInit si = new ServerInit();
         si.setVisible(true);// TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_serverBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void clientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientBtnActionPerformed
         ClientInit ci = new ClientInit();
         ci.setVisible(true);// TODO add your handling code here:
         this.dispose();   // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_clientBtnActionPerformed
+
+    private void serverLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serverLabelMouseClicked
+        serverBtn.doClick();
+    }//GEN-LAST:event_serverLabelMouseClicked
+
+    private void clientLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientLabelMouseClicked
+        clientBtn.doClick();
+    }//GEN-LAST:event_clientLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -150,10 +170,10 @@ public class PCRemoteUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton clientBtn;
+    private javax.swing.JLabel clientLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton serverBtn;
+    private javax.swing.JLabel serverLabel;
     // End of variables declaration//GEN-END:variables
 }
