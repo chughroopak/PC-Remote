@@ -1,5 +1,6 @@
 package Server;
 
+import Chatexpress.SDrawInit;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
@@ -74,7 +75,7 @@ class ServerHandler extends Thread {
             Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();
             rect = new Rectangle(dimen);
             robot = new Robot(gd);
-            drawGUI();
+            new SDrawInit(server_ip);
             new ScreenSpyer(client, robot, rect);
             new ServerDriver(client, robot);
         } catch (AWTException e) {
@@ -84,21 +85,5 @@ class ServerHandler extends Thread {
         }
     }
 
-    private void drawGUI() {
-        JFrame jframe = new JFrame("Remote Administrator");
-        JButton btn = new JButton("Terminate");
-
-        jframe.setBounds(100, 100, 150, 150);
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.add(btn);
-        btn.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        }
-        );
-        jframe.setVisible(true);
-    }
+    
 }
