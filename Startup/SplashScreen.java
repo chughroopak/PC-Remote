@@ -1,7 +1,5 @@
 package Startup;
 
-
-import Startup.PCRemoteUI;
 import java.awt.Color;
 import java.util.Random;
 import java.util.logging.Level;
@@ -41,7 +39,7 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
         /*
             Code to open Login Screen
             is to be written here
-        */
+         */
     }
 
     public SplashScreen() throws InterruptedException {

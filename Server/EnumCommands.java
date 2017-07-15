@@ -1,4 +1,3 @@
-
 package Server;
 
 /**
@@ -13,11 +12,11 @@ public enum EnumCommands {
 
     private int abbrev;
 
-    EnumCommands(int abbrev){
+    EnumCommands(int abbrev) {
         this.abbrev = abbrev;
     }
 
-    public int getAbbrev(){
+    public int getAbbrev() {
         return abbrev;
     }
 }

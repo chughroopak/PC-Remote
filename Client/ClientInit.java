@@ -1,32 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Client;
 
-import java.awt.AWTException;
+import Startup.PCRemoteUI;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author ROOPAK CHUGH
- */
 public class ClientInit extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ClientInit
-     */
     public ClientInit() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-    
-    
-    public void initialize(String server_ip, int server_port ){
 
-        Socket sc;
+    Socket sc = null;
+    JOptionPane jOptionPane = new JOptionPane();
+    DataOutputStream dOut;
+    DataInputStream dIn;
+    String ip, port, p, user, message;
+
+    public void initialize(String server_ip, int server_port) {
+
         try {
             System.out.println("Connecting to server......");
             sc = new Socket(server_ip, server_port);
@@ -34,7 +32,6 @@ public class ClientInit extends javax.swing.JFrame {
             ClientHandler ch = new ClientHandler(sc);
             ch.setVisible(true);
             this.dispose();
-            
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -42,8 +39,7 @@ public class ClientInit extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,16 +167,53 @@ public class ClientInit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        PCRemoteUI pc = new PCRemoteUI();
+        pc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    initialize(ipfield.getText(),Integer.parseInt(portfield.getText()));    
+        ip = ipfield.getText().trim();
+        port = portfield.getText().trim();
+        p = passfield.getText().trim();
+        user = usernamefield.getText().trim();
+        if (ip.isEmpty() || port.isEmpty() || p.isEmpty() || user.isEmpty()) {
+            message = "Please enter all values";
+        } else if (authenticate("connect")) {
+            initialize(ipfield.getText(), Integer.parseInt(portfield.getText()));
+        } else {
+            message = "Password entered is incorrect.";
+        }
+        JOptionPane.showMessageDialog(this, message);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    boolean authenticate(String btn) {
+        boolean result = false;
+        try {
+            sc = new Socket(ipfield.getText(), Integer.parseInt(portfield.getText()));
+            String s = passfield.getText();
+            // Send passfield data to server
+            dOut = new DataOutputStream(sc.getOutputStream());
+            dIn = new DataInputStream(sc.getInputStream()); // To receive whether password is right or not
+            if (btn.equals("connect")) {
+                dOut.writeByte(1);
+                dOut.writeUTF(s);
+                dOut.flush();
+            }
+            byte type = dIn.readByte();
+            if (type == 1) {
+                result = true;
+            } else if (type == 2) {
+                result = false;
+            }
+            dIn.close();
+            dOut.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
