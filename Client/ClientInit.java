@@ -1,5 +1,6 @@
 package Client;
 
+import Chatexpress.CDrawInit;
 import Startup.PCRemoteUI;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -31,6 +32,7 @@ public class ClientInit extends javax.swing.JFrame {
             System.out.println("Connection Established.");
             ClientHandler ch = new ClientHandler(sc);
             ch.setVisible(true);
+            new CDrawInit(server_ip);
             this.dispose();
 
         } catch (UnknownHostException e) {
