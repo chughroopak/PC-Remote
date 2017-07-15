@@ -31,6 +31,7 @@ public class ClientInit extends javax.swing.JFrame {
             System.out.println("Connection Established.");
             ClientHandler ch = new ClientHandler(sc);
             ch.setVisible(true);
+            new CDrawInit(server_ip);
             this.dispose();
 
         } catch (UnknownHostException e) {
