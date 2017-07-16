@@ -28,8 +28,10 @@ class ServerHandler extends Thread {
     boolean receive = true;
     int pass;
     String pswd;
+    private String server_ip;
 
-    public ServerHandler(int port, int pass) {
+    public ServerHandler(int server_ip,int port, int pass) {
+        this.server_ip=server_ip;
         this.port = port;
         this.pass = pass;
         start();
