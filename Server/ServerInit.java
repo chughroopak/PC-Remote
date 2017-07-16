@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 public final class ServerInit extends javax.swing.JFrame {
 
@@ -23,6 +24,8 @@ public final class ServerInit extends javax.swing.JFrame {
 
     public ServerInit() {
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         setLocationRelativeTo(null);
         pass = 1000 + (int) (Math.random() * 9000);
         String ip = new String();
@@ -36,6 +39,7 @@ public final class ServerInit extends javax.swing.JFrame {
         portfield.setText("2500");
         passfield.setText(String.valueOf(pass));
         handler = new ServerHandler(port,pass);
+        portfield.setEditable(false);
     }
 
     public int getPort() {
@@ -97,7 +101,6 @@ public final class ServerInit extends javax.swing.JFrame {
         ipfield = new javax.swing.JTextArea();
         portfield = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,7 +136,6 @@ public final class ServerInit extends javax.swing.JFrame {
         passfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         passfield.setForeground(new java.awt.Color(0, 0, 255));
         passfield.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        passfield.setText("jLabel8");
 
         ipfield.setEditable(false);
         ipfield.setBackground(new java.awt.Color(240, 240, 240));
@@ -148,7 +150,6 @@ public final class ServerInit extends javax.swing.JFrame {
         portfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         portfield.setForeground(new java.awt.Color(0, 0, 244));
         portfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        portfield.setText("jTextField1");
         portfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 portfieldActionPerformed(evt);
@@ -157,13 +158,6 @@ public final class ServerInit extends javax.swing.JFrame {
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Use above information to login from client");
-
-        jButton1.setText("Update Port");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,7 +175,7 @@ public final class ServerInit extends javax.swing.JFrame {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(53, 53, 53)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(portfield, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(portfield, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(passfield, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -191,8 +185,7 @@ public final class ServerInit extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jButton1))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 7, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -206,13 +199,12 @@ public final class ServerInit extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(portfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(portfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passfield)
@@ -228,10 +220,6 @@ public final class ServerInit extends javax.swing.JFrame {
     private void portfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portfieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_portfieldActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,7 +258,6 @@ public final class ServerInit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea ipfield;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
