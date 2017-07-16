@@ -183,6 +183,7 @@ public class ClientInit extends javax.swing.JFrame {
             message = "Please enter all values";
         } else if (authenticate("connect")) {
             initialize(ipfield.getText(), Integer.parseInt(portfield.getText()));
+            message = "Connected!";
         } else {
             message = "Password entered is incorrect.";
         }
