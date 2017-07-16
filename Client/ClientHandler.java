@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import javax.swing.ImageIcon;
 
 public class ClientHandler extends javax.swing.JFrame {
 
@@ -14,6 +15,8 @@ public class ClientHandler extends javax.swing.JFrame {
 
     public ClientHandler(Socket cSocket) {
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         setExtendedState(MAXIMIZED_BOTH);
         this.cSocket = cSocket;
         run();
