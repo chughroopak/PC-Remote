@@ -7,12 +7,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ClientInit extends javax.swing.JFrame {
 
     public ClientInit() {
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         setLocationRelativeTo(null);
     }
 
