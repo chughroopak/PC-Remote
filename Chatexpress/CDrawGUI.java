@@ -1,42 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Chatexpress;
 
 import java.io.*;
-import java.net.*;import java.util.logging.Level;
+import java.net.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- *
- * @author Archit Garg
- */
+import javax.swing.ImageIcon;
+
 public class CDrawGUI extends javax.swing.JFrame {
-      Socket s;
-      public DataInputStream dis;
-      DataOutputStream dos;   
-      String server_ip;
-      public String cmessage,smessage;
-      /**
-     * Creates new form DrawGUI
-     */
-      public CDrawGUI(){
-          initComponents();
-      }
-      
-      public CDrawGUI(String server_ip) {
-          initComponents();
-          try{
-              this.server_ip=server_ip;
-              s=new Socket(server_ip,2600);
-              System.out.println(s);
-              dis=new DataInputStream(s.getInputStream());
-              dos=new DataOutputStream(s.getOutputStream()); 
-          }catch(Exception e){
-              e.printStackTrace();
-          }
-      }
+
+    Socket s;
+    public DataInputStream dis;
+    DataOutputStream dos;
+    String server_ip;
+    public String cmessage, smessage;
+
+    public CDrawGUI() {
+        initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
+    }
+
+    public CDrawGUI(String server_ip) {
+        initComponents();
+        try {
+            this.server_ip = server_ip;
+            s = new Socket(server_ip, 2600);
+            System.out.println(s);
+            dis = new DataInputStream(s.getInputStream());
+            dos = new DataOutputStream(s.getOutputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,16 +155,16 @@ public class CDrawGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     System.exit(0);   // TODO add your handling code here:
+        System.exit(0);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-          try {
+        try {
             new FileReceiver(server_ip);
-          } catch (IOException ex) {
-              Logger.getLogger(CDrawGUI.class.getName()).log(Level.SEVERE, null, ex);
-          }
-       // TODO add your handling code here:
+        } catch (IOException ex) {
+            Logger.getLogger(CDrawGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -177,16 +172,16 @@ public class CDrawGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       try{
-           cmessage=jTextField1.getText();
+        try {
+            cmessage = jTextField1.getText();
             dos.writeUTF(cmessage);
             dos.flush();
-            jTextArea1.append("client:"+cmessage+"\n");
+            jTextArea1.append("client:" + cmessage + "\n");
             jTextField1.setText(null);
-       }catch(Exception e){
-           e.printStackTrace();
-       }
-            // TODO add your handling code here:
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
