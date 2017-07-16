@@ -15,23 +15,24 @@ import javax.swing.JOptionPane;
  *
  * @author Archit Garg
  */
-public class FileTransfer extends javax.swing.JFrame {
+public class CFileTransfer extends javax.swing.JFrame {
 
       Socket s;
       DataOutputStream dout,dout1;
       String s1=new String();
       File f;
       String s2="";
-      ServerSocket ss;
       JFileChooser jfc;
       
-     
-    public FileTransfer(){
+      public CFileTransfer(){
+          initComponents();
+      }
+      
+    public CFileTransfer(String server_ip)throws IOException {
         initComponents();
         try{
-            JOptionPane.showMessageDialog(new JFrame(),"waiting for client to accept request");
-            ss=new ServerSocket(2700);
-            s=ss.accept();
+            JOptionPane.showMessageDialog(new JFrame(),"waiting for server to accept request");
+            s=new Socket(server_ip,2800);
             dout=new DataOutputStream(s.getOutputStream());
             dout1=new DataOutputStream(s.getOutputStream());
             DataInputStream dis=new DataInputStream(s.getInputStream());
@@ -158,13 +159,12 @@ public class FileTransfer extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        s1=jTextArea1.getText();
        jFrame1.dispose();
-       fileTransfer(s1);
+       cFileTransfer(s1);
        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
      
-       public void fileTransfer(String s1){
+       public void cFileTransfer(String s1){
            try{
-               
                dout.writeUTF(s1);
                dout.flush();
                s2=f.getAbsolutePath();
@@ -177,7 +177,6 @@ public class FileTransfer extends javax.swing.JFrame {
                        dout1.flush();
                }while(s3!=null);
                JOptionPane.showMessageDialog(new JFrame(),"file sent");
-               
                }catch(Exception e){
                e.printStackTrace();
            }
@@ -199,20 +198,21 @@ public class FileTransfer extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CFileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CFileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CFileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CFileTransfer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FileTransfer().setVisible(true);
+                new CFileTransfer().setVisible(true);
             }
         });
     }
