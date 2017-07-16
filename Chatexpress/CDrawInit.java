@@ -21,14 +21,13 @@ public class CDrawInit extends Thread{
     
     public CDrawInit(String server_ip) {
         this.server_ip=server_ip;
-        dg=new CDrawGUI(server_ip);
-        dg.setVisible(true);
         start();
         }
     
     public void run(){
             try {
-                
+                dg=new CDrawGUI(server_ip);
+        dg.setVisible(true);
                  do{
                      
                 String smessage=dg.dis.readUTF();

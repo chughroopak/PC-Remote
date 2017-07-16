@@ -17,19 +17,17 @@ import java.util.logging.Logger;
  * @author Archit garg
  */
 public class SDrawInit extends Thread{ 
-    String server_ip;
     SDrawGUI dg;
     
-    public SDrawInit(String server_ip) {
-        this.server_ip=server_ip;
-        dg=new SDrawGUI(server_ip);
-        dg.setVisible(true);
+    public SDrawInit() {
         start();
     }
     
     public void run(){
          try {
-             
+            dg=new SDrawGUI();
+        dg.setVisible(true);
+         
              do{
                 
                dg.cmessage=dg.dis.readUTF();
