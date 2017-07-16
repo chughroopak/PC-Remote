@@ -1,5 +1,6 @@
 package Server;
 
+import Chatexpress.SDrawInit;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
@@ -45,36 +46,44 @@ class ServerHandler extends Thread {
             int clients = 0;
             while (clients == 0) {
                 client = sc.accept();
-                clients++;
-            }
-            // Check whether password is correct or not
-            dIn = new DataInputStream(client.getInputStream());
-            dOut = new DataOutputStream(client.getOutputStream());// Send response back to authenticate
-            while (receive) {
-                byte type = dIn.readByte();
-                if (type == 1) {
-                    pswd = dIn.readUTF();
-                    if (pswd.equals(String.valueOf(pass))) {
-                        dOut.writeByte(1);
-                        dOut.flush();
-                        receive = false;
+                if(client!=null){
+                    System.out.println("Client Recieved!");
+                    dIn = new DataInputStream(client.getInputStream());
+                    dOut = new DataOutputStream(client.getOutputStream());// Send response back to authenticate
+                    byte type = dIn.readByte();
+                    System.out.println("Read Byte");
+                    if (type == 1) {
+                        pswd = dIn.readUTF();
+                        System.out.println("Password Recieved:"+pswd);
+                        if (pswd.equals(String.valueOf(pass))) {
+                            System.out.println("Password Matched!");
+                            dOut.writeByte(1);
+                            dOut.flush();
+                            dIn.close();
+                            dOut.close();
+                            client = sc.accept();
+                            clients++;
+                        }
+                        else{
+                            dOut.writeByte(2);
+                            dOut.flush();
+                            dIn.close();
+                            dOut.close();
+                            client = null;
+                            clients=0;
+                        }
                     }
-                    else{
-                        dOut.writeByte(2);
-                        dOut.flush();
-                    }
+                    
                 }
             }
-            dIn.close();
-            dOut.close();
-            client = sc.accept();
+            // Check whether password is correct or not
             System.out.println("Connection Established.");
             GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice gd = gEnv.getDefaultScreenDevice();
             Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();
             rect = new Rectangle(dimen);
             robot = new Robot(gd);
-            drawGUI();
+            new SDrawInit();
             new ScreenSpyer(client, robot, rect);
             new ServerDriver(client, robot);
         } catch (AWTException e) {
@@ -84,21 +93,5 @@ class ServerHandler extends Thread {
         }
     }
 
-    private void drawGUI() {
-        JFrame jframe = new JFrame("Remote Administrator");
-        JButton btn = new JButton("Terminate");
-
-        jframe.setBounds(100, 100, 150, 150);
-        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jframe.add(btn);
-        btn.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        }
-        );
-        jframe.setVisible(true);
-    }
+    
 }
