@@ -12,20 +12,21 @@ import javax.swing.JOptionPane;
  *
  * @author Archit Garg
  */
-public class FileReceiver extends Thread {
+public class SFileReceiver extends Thread {
     Socket s;
     String server_ip;
     DataInputStream dis,dis1;
     PrintWriter pw;
      JFrame f;
+     ServerSocket ss;
     
     
-    public FileReceiver(String server_ip) throws IOException{
+    public SFileReceiver() throws IOException{
         try{
-            this.server_ip=server_ip;
-             s=new Socket(server_ip,2700);
-             dis=new DataInputStream(s.getInputStream());
-             DataOutputStream dout=new DataOutputStream(s.getOutputStream());
+            ss=new ServerSocket(2800);
+            s=ss.accept();
+            dis=new DataInputStream(s.getInputStream());
+            DataOutputStream dout=new DataOutputStream(s.getOutputStream());
             int a=JOptionPane.showConfirmDialog(f=new JFrame(),"Do you want to receive file?");
             if(a==JOptionPane.YES_OPTION){
             dout.writeInt(8);
@@ -38,6 +39,7 @@ public class FileReceiver extends Thread {
             }
             if(a==JOptionPane.NO_OPTION){
             f.dispose();
+            
             dout.writeInt(7);
             dout.flush();
             }
