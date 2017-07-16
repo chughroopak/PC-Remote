@@ -35,7 +35,7 @@ public final class ServerInit extends javax.swing.JFrame {
         ipfield.setText(ip);
         portfield.setText("2500");
         passfield.setText(String.valueOf(pass));
-        handler = new ServerHandler(port,pass);
+        handler = new ServerHandler(ip,port,pass);
     }
 
     public int getPort() {
