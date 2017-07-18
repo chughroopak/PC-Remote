@@ -55,6 +55,7 @@ public class ClientHandler extends javax.swing.JFrame {
         cPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Remote PC");
 
         javax.swing.GroupLayout cPanelLayout = new javax.swing.GroupLayout(cPanel);
         cPanel.setLayout(cPanelLayout);

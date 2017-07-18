@@ -9,6 +9,7 @@ public class PCRemoteUI extends javax.swing.JFrame {
     public PCRemoteUI() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Remote PC");
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
         setIconImage(icon.getImage());
     }

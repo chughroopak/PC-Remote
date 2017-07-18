@@ -42,6 +42,7 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
 
     public SplashScreen() throws InterruptedException {
         initComponents();
+        setTitle("Remote PC");
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
         setIconImage(icon.getImage());
         getContentPane().setBackground(Color.white);
