@@ -7,12 +7,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ClientInit extends javax.swing.JFrame {
 
     public ClientInit() {
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         setLocationRelativeTo(null);
     }
 
@@ -63,6 +66,7 @@ public class ClientInit extends javax.swing.JFrame {
         usernamefield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Remote PC");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));

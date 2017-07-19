@@ -1,39 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Chatexpress;
 
 import java.io.*;
 import java.net.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
-/**
- *
- * @author Archit Garg
- */
-public class SDrawGUI extends JFrame{
+
+public class SDrawGUI extends JFrame {
+
     Socket s;
     ServerSocket ss;
     public DataInputStream dis;
-    DataOutputStream dos;   
-    public String cmessage,smessage;
+    DataOutputStream dos;
+    public String cmessage, smessage;
 
-    public SDrawGUI(){
-      initComponents();
-        try{
-            ss=new ServerSocket(2600);
-            s=ss.accept();
+    public SDrawGUI() {
+        initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
+
+        try {
+            ss = new ServerSocket(2600);
+            s = ss.accept();
             System.out.println(s);
-            dis=new DataInputStream(s.getInputStream());
-            dos=new DataOutputStream(s.getOutputStream());  
-        }catch(Exception e){
+            dis = new DataInputStream(s.getInputStream());
+            dos = new DataOutputStream(s.getOutputStream());
+        } catch (Exception e) {
             e.printStackTrace();
         }
-     }
-  
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,7 +162,7 @@ public class SDrawGUI extends JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     System.exit(0);   // TODO add your handling code here:
+        System.exit(0);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -186,18 +179,18 @@ public class SDrawGUI extends JFrame{
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       try{
-           smessage=jTextField1.getText();
-                     
+        try {
+            smessage = jTextField1.getText();
+
             dos.writeUTF(smessage);
             dos.flush();
-            
-            jTextArea1.append("server:"+smessage+"\n");
+
+            jTextArea1.append("server:" + smessage + "\n");
             jTextField1.setText(null);
-            
-       }catch(Exception e){
-           e.printStackTrace();
-       }// TODO add your handling code here:
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -243,7 +236,7 @@ public class SDrawGUI extends JFrame{
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

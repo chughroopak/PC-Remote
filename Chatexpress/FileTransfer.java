@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Chatexpress;
 
 import javax.swing.JFileChooser;
 import java.io.*;
 import java.net.*;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Archit Garg
- */
 public class FileTransfer extends javax.swing.JFrame {
-
       Socket s;
       DataOutputStream dout,dout1;
       String s1=new String();
@@ -28,6 +19,8 @@ public class FileTransfer extends javax.swing.JFrame {
      
     public FileTransfer(){
         initComponents();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         try{
             JOptionPane.showMessageDialog(new JFrame(),"waiting for client to accept request");
             ss=new ServerSocket(2700);
@@ -46,11 +39,9 @@ public class FileTransfer extends javax.swing.JFrame {
         }catch(Exception e){
             e.printStackTrace();
         }
-       
-    }
-   
 
-    
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,24 +136,24 @@ public class FileTransfer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         JFileChooser jfc=new JFileChooser();
-          int x=jfc.showOpenDialog(null);
-          if(x==JFileChooser.APPROVE_OPTION){
-               f=jfc.getSelectedFile();
-               String path=f.getPath();
-               s1=f.getName();
-               jTextArea1.setText(path);
-            } 
+        JFileChooser jfc = new JFileChooser();
+        int x = jfc.showOpenDialog(null);
+        if (x == JFileChooser.APPROVE_OPTION) {
+            f = jfc.getSelectedFile();
+            String path = f.getPath();
+            s1 = f.getName();
+            jTextArea1.setText(path);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       s1=jTextArea1.getText();
-       jFrame1.dispose();
-       fileTransfer(s1);
-       // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-     
-       public void fileTransfer(String s1){
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+      //GEN-FIRST:event_jButton2ActionPerformed
+        s1 = jTextArea1.getText();
+        jFrame1.dispose();
+        fileTransfer(s1);
+    }
+
+  public void fileTransfer(String s1){
            try{
                
                dout.writeUTF(s1);
