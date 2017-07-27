@@ -17,7 +17,10 @@ public class ClientHandler extends javax.swing.JFrame {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
         setIconImage(icon.getImage());
+<<<<<<< HEAD
         setExtendedState(MAXIMIZED_BOTH);
+=======
+>>>>>>> chughroopak
         this.cSocket = cSocket;
         run();
     }
