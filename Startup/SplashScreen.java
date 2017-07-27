@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 public class SplashScreen extends javax.swing.JFrame implements Runnable {
 
-    /**
-     * Creates new form SplashScreen
-     */
     int value;
 
     @Override
@@ -44,6 +42,9 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
 
     public SplashScreen() throws InterruptedException {
         initComponents();
+        setTitle("Remote PC");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
         progressBar.setForeground(Color.BLACK);

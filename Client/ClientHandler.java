@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import javax.swing.ImageIcon;
 
 public class ClientHandler extends javax.swing.JFrame {
 
@@ -14,7 +15,8 @@ public class ClientHandler extends javax.swing.JFrame {
 
     public ClientHandler(Socket cSocket) {
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
+        setIconImage(icon.getImage());
         this.cSocket = cSocket;
         run();
     }
@@ -52,6 +54,7 @@ public class ClientHandler extends javax.swing.JFrame {
         cPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Remote PC");
 
         javax.swing.GroupLayout cPanelLayout = new javax.swing.GroupLayout(cPanel);
         cPanel.setLayout(cPanelLayout);

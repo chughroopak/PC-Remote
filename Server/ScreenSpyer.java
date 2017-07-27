@@ -33,24 +33,18 @@ class ScreenSpyer extends Thread {
             ex.printStackTrace();
         }
 
-        while (continueLoop) {
+        try{
+            while (continueLoop) {
             BufferedImage image = robot.createScreenCapture(rectangle);
             ImageIcon imageIcon = new ImageIcon(image);
-
-            try {
                 System.out.println("before sending image");
                 oos.writeObject(imageIcon);
                 oos.reset();
                 System.out.println("New screenshot sent");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
-            try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
     }
