@@ -187,12 +187,7 @@ public class SDrawGUI extends JFrame {
 
             jTextArea1.append("server:" + smessage + "\n");
             jTextField1.setText(null);
-
-<<<<<<< HEAD
-        } catch (Exception e) {
-=======
         } catch (IOException e) {
->>>>>>> chughroopak
             e.printStackTrace();
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -201,11 +196,7 @@ public class SDrawGUI extends JFrame {
          try {
             new SFileReceiver();
           } catch (IOException ex) {
-<<<<<<< HEAD
-              Logger.getLogger(CDrawGUI.class.getName()).log(Level.SEVERE, null, ex);
-=======
                 ex.printStackTrace();
->>>>>>> chughroopak
           }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
