@@ -11,12 +11,26 @@ class ServerDriver extends Thread {
     boolean loop = true;
     Socket socket = null;
 
+    /**
+     * 
+     * Constructor used to initialize socket
+     * robot and start the thread.
+     * 
+     */
     public ServerDriver(Socket socket, Robot robot) {
         this.socket = socket;
         this.robot = robot;
         start();
     }
 
+    /**
+     * 
+     * Thread used to start InStream 
+     * and drive the server according 
+     * to the commands given by the
+     * client.
+     * 
+     */
     @Override
     public void run() {
         Scanner scanner = null;
