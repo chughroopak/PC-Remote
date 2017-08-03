@@ -6,6 +6,15 @@ import javax.swing.ImageIcon;
 
 public class PCRemoteUI extends javax.swing.JFrame {
 
+    /*
+    *
+    *   Default Constuctor of JFrame(PCRemoteUI)
+    *   to initialize the JFrame with
+    *   custom icon, location
+    *   and title.
+    *
+    */
+    
     public PCRemoteUI() {
         initComponents();
         setLocationRelativeTo(null);
@@ -131,22 +140,22 @@ public class PCRemoteUI extends javax.swing.JFrame {
 
     private void serverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serverBtnActionPerformed
         ServerInit si = new ServerInit();
-        si.setVisible(true);// TODO add your handling code here:
-        this.dispose();
+        si.setVisible(true); //Display ServerInit JFrame
+        this.dispose(); //Close PCRemoteUI.java
     }//GEN-LAST:event_serverBtnActionPerformed
 
     private void clientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientBtnActionPerformed
         ClientInit ci = new ClientInit();
-        ci.setVisible(true);// TODO add your handling code here:
-        this.dispose();   // TODO add your handling code here:
+        ci.setVisible(true); //Display ClientInit JFrame
+        this.dispose();   //Close PCRemoteUI.java
     }//GEN-LAST:event_clientBtnActionPerformed
 
     private void serverLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serverLabelMouseClicked
-        serverBtn.doClick();
+        serverBtn.doClick(); //Display ClientInit JFrame from Server image 
     }//GEN-LAST:event_serverLabelMouseClicked
 
     private void clientLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientLabelMouseClicked
-        clientBtn.doClick();
+        clientBtn.doClick(); //Display ClientInit JFrame from Client image
     }//GEN-LAST:event_clientLabelMouseClicked
 
     /**
