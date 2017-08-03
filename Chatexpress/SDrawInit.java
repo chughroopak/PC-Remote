@@ -19,10 +19,19 @@ import java.util.logging.Logger;
 public class SDrawInit extends Thread{ 
     SDrawGUI dg;
     
+    /*
+    *constructor
+    *starts thread
+    */
     public SDrawInit() {
         start();
     }
     
+    /*
+    *opens server chat window
+    *receive messages from client
+    *show client messages on server chat window
+    */
     public void run(){
          try {
             dg=new SDrawGUI();
