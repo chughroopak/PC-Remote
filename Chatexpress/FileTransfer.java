@@ -16,7 +16,10 @@ public class FileTransfer extends javax.swing.JFrame {
       ServerSocket ss;
       JFileChooser jfc;
       
-     
+     /*
+     *set iceon on file transfer window
+     *create server socket for connecting to client file receiver
+     */
     public FileTransfer(){
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
@@ -134,7 +137,11 @@ public class FileTransfer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  
+    /*
+    *open file chooser window
+    *display path of file on file transfer window
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JFileChooser jfc = new JFileChooser();
         int x = jfc.showOpenDialog(null);
@@ -145,7 +152,10 @@ public class FileTransfer extends javax.swing.JFrame {
             jTextArea1.setText(path);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    /*
+    *call fileTransfer function
+    */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
       //GEN-FIRST:event_jButton2ActionPerformed
         s1 = jTextArea1.getText();
@@ -153,6 +163,11 @@ public class FileTransfer extends javax.swing.JFrame {
         fileTransfer(s1);
     }
 
+      /*
+      *fileTransfer function
+      *send name and path of file to the client
+      *read data from file and send it to client
+      */
   public void fileTransfer(String s1){
            try{
                
