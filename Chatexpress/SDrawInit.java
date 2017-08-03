@@ -21,14 +21,14 @@ public class SDrawInit extends Thread{
     
     /*
     *constructor
-    *starts thread
+    *starts the thread
     */
     public SDrawInit() {
         start();
     }
     
     /*
-    *opens server chat window
+    *open server chat window
     *receive messages from client
     *show client messages on server chat window
     */
