@@ -19,11 +19,18 @@ public class CDrawInit extends Thread{
     String server_ip = null; 
     CDrawGUI dg;
     
+    /*
+    *starts the thread
+    */
     public CDrawInit(String server_ip) {
         this.server_ip=server_ip;
         start();
         }
     
+    /*
+    *opens client chat window
+    *receives messages from server and display it on client chat room
+    */
     public void run(){
             try {
                 dg=new CDrawGUI(server_ip);
