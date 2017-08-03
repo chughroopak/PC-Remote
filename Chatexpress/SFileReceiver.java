@@ -6,7 +6,8 @@
 package Chatexpress;
 
 import java.io.*;
-import java.net.*;import javax.swing.JFrame;
+import java.net.*;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
  *
@@ -19,8 +20,11 @@ public class SFileReceiver extends Thread {
     PrintWriter pw;
      JFrame f;
      ServerSocket ss;
-    
-    
+ 
+    /**constructor
+    *accept file name and its location from client
+    *creates new file at server side
+    */   
     public SFileReceiver() throws IOException{
         try{
             ss=new ServerSocket(2800);
@@ -48,6 +52,9 @@ public class SFileReceiver extends Thread {
         }
     }
     
+    /**
+    *used to accept file data from client
+    */
     public void run(){
         String str="";
                 try{
