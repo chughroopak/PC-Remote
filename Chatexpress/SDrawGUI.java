@@ -12,6 +12,11 @@ public class SDrawGUI extends JFrame {
     DataOutputStream dos;
     public String cmessage, smessage;
 
+    /*
+    *set icon of server chat window
+    *creates server socket used to connect with client chat room
+    */
+    
     public SDrawGUI() {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
@@ -160,11 +165,17 @@ public class SDrawGUI extends JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     
+    /*
+    *shut down the server chat window
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    /*
+    *opens file tranfer window
+    */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       try{ 
           FileTransfer ft=new FileTransfer();
@@ -173,11 +184,18 @@ public class SDrawGUI extends JFrame {
       }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    /*
+    *server write his messege in it
+    */
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    
+    /*
+    *send server message to client
+    *show server message on chat area
+    */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             smessage = jTextField1.getText();
@@ -192,6 +210,9 @@ public class SDrawGUI extends JFrame {
         }// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /*
+    *calls server file receiver file
+    */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
          try {
             new SFileReceiver();
