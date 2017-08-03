@@ -11,7 +11,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ClientInit extends javax.swing.JFrame {
-
+ 
+    /*
+    *default constructor 
+    *used to set icon on cliet handler window
+    */
     public ClientInit() {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
@@ -25,6 +29,11 @@ public class ClientInit extends javax.swing.JFrame {
     DataInputStream dIn;
     String ip, port, p, user, message;
 
+    /*
+    *establish connection with server
+    *opens client handler window
+    *initialise the CDrawInit file
+    */
     public void initialize(String server_ip, int server_port) {
 
         try {
@@ -170,12 +179,19 @@ public class ClientInit extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    *opens PCRemoteUI file when clicked
+    */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         PCRemoteUI pc = new PCRemoteUI();
         pc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /*
+    *check whether all field are filled or not
+    *calls function authenticate which check whether password is correct or not
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ip = ipfield.getText().trim();
         port = portfield.getText().trim();
@@ -192,6 +208,9 @@ public class ClientInit extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, message);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /*
+    *used to authenticate password
+    */
     boolean authenticate(String btn) {
         boolean result = false;
         try {
