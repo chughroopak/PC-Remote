@@ -18,6 +18,9 @@ class ClientScreenReciever extends Thread {
     private JPanel cPanel = null;
     private boolean continueLoop = true;
 
+    /*
+    *parameterised constructor used to start the thread
+    */
     public ClientScreenReciever(ObjectInputStream ois, JPanel p) {
         cObjectInputStream = ois;
         cPanel = p;
@@ -26,6 +29,10 @@ class ClientScreenReciever extends Thread {
     }
 
     @Override
+    /*
+    *Read screenshots of the client then draw them
+    *resize them
+    */
     public void run() {
 
         try {
