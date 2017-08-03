@@ -24,10 +24,17 @@ public class CFileTransfer extends javax.swing.JFrame {
       String s2="";
       JFileChooser jfc;
       
+      /*
+      *default constructor
+      */
       public CFileTransfer(){
           initComponents();
       }
-      
+    
+    /*
+    *parameterised constructor
+    *create connection with server file receiver window
+    */
     public CFileTransfer(String server_ip)throws IOException {
         initComponents();
         try{
@@ -145,6 +152,10 @@ public class CFileTransfer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+      /*
+      *open file chooser window on client side
+      *show path of file choosen on file chooser window
+      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          JFileChooser jfc=new JFileChooser();
           int x=jfc.showOpenDialog(null);
@@ -156,6 +167,9 @@ public class CFileTransfer extends javax.swing.JFrame {
             } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+      /*
+      *calls fileTransfer function
+      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        s1=jTextArea1.getText();
        jFrame1.dispose();
@@ -163,6 +177,10 @@ public class CFileTransfer extends javax.swing.JFrame {
        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
      
+      /*
+      *send file name and path to the server
+      *read data from file and send it to server
+      */
        public void cFileTransfer(String s1){
            try{
                dout.writeUTF(s1);
