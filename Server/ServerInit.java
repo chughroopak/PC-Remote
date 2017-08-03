@@ -9,8 +9,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public final class ServerInit extends javax.swing.JFrame {
@@ -19,21 +17,31 @@ public final class ServerInit extends javax.swing.JFrame {
      * Creates new form ServerInit
      */
     int port;
-    private int pass;
+    private int pass; //Random Password
     ServerHandler handler;
 
+    /*
+    *
+    *   Default Constuctor of JFrame(ServerInit)
+    *   to initialize the JFrame with
+    *   custom icon, location, title,
+    *   port no and generate random
+    *   password.
+    *
+    */
+    
     public ServerInit() {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
         setIconImage(icon.getImage());
         setLocationRelativeTo(null);
-        pass = 1000 + (int) (Math.random() * 9000);
+        pass = 1000 + (int) (Math.random() * 9000); // Generate random number
         String ip = new String();
         port = 2500;
         try {
             ip = getLocalHostAddresses();
         } catch (Exception ex) {
-            Logger.getLogger(ServerInit.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         ipfield.setText(ip);
         portfield.setText("2500");
@@ -41,11 +49,23 @@ public final class ServerInit extends javax.swing.JFrame {
         handler = new ServerHandler(port,pass);
         portfield.setEditable(false);
     }
-
+    
+    /*
+    *   Function used to get port value
+    */
+    
     public int getPort() {
         return port;
     }
 
+    /*
+    *
+    *   Function used to list all the 
+    *   local host addresses in the 
+    *   ipfield JTextArea which is to be 
+    *   entered by the client.
+    *
+    */
     public String getLocalHostAddresses() {
         ArrayList<String> addresses = new ArrayList<>();
         System.setProperty("java.net.preferIPv4Stack", "true");
