@@ -8,9 +8,17 @@ import javax.swing.ImageIcon;
 
 public class SplashScreen extends javax.swing.JFrame implements Runnable {
 
-    int value;
+    int value; //Value to be displayed on Progress bar
 
     @Override
+    /*
+    *
+    *   Thread to generate a
+    *   random number and 
+    *   display it on the
+    *   progress bar.
+    *
+    */
     public void run() {
         Random rand = new Random();
         int a = rand.nextInt(30) + 20;
@@ -34,12 +42,15 @@ public class SplashScreen extends javax.swing.JFrame implements Runnable {
                 ex.printStackTrace();
             }
         }
-        /*
-            Code to open Login Screen
-            is to be written here
-         */
     }
-
+    /*
+    *
+    *   Default Constuctor of JFrame(SplashScreen)
+    *   to initialize the JFrame with
+    *   custom icon, location
+    *   and title.
+    *
+    */
     public SplashScreen() throws InterruptedException {
         initComponents();
         setTitle("Remote PC");
