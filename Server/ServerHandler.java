@@ -25,12 +25,26 @@ class ServerHandler extends Thread {
     int pass;
     String pswd;
 
+    /**
+     * 
+     * Constructor used to initialize
+     * pass and port and start the
+     * thread.
+     * 
+     */
+    
     public ServerHandler(int port, int pass) {
         this.port = port;
         this.pass = pass;
         start();
     }
-
+    /**
+     * 
+     * Thread used to receive and 
+     * authenticate the random password
+     * generated at server.
+     * 
+     */
     @Override
     public void run() {
         Robot robot = null;
@@ -44,13 +58,18 @@ class ServerHandler extends Thread {
                 client = sc.accept();
                 if(client!=null){
                     System.out.println("Client Recieved!");
-                    dIn = new DataInputStream(client.getInputStream());
-                    dOut = new DataOutputStream(client.getOutputStream());// Send response back to authenticate
+                    dIn = new DataInputStream(client.getInputStream()); // To receive the entered password
+                    dOut = new DataOutputStream(client.getOutputStream());// Send response back to authenticate password
                     byte type = dIn.readByte();
                     System.out.println("Read Byte");
                     if (type == 1) {
                         pswd = dIn.readUTF();
                         System.out.println("Password Recieved:"+pswd);
+                        /**
+                         * If password is correct then 
+                         * code of following if statement
+                         * will be executed.
+                         */
                         if (pswd.equals(String.valueOf(pass))) {
                             System.out.println("Password Matched!");
                             dOut.writeByte(1);
@@ -72,8 +91,14 @@ class ServerHandler extends Thread {
                     
                 }
             }
-            // Check whether password is correct or not
             System.out.println("Connection Established.");
+            /**
+             * 
+             * The screen size and resolution of the screen
+             * is captured and ScreenSpyer of that
+             * resolution is created.
+             * 
+             */
             GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice gd = gEnv.getDefaultScreenDevice();
             Dimension dimen = Toolkit.getDefaultToolkit().getScreenSize();
