@@ -14,12 +14,18 @@ public class CDrawGUI extends javax.swing.JFrame {
     String server_ip;
     public String cmessage, smessage;
 
+    /*
+    *set icon on client chat window
+    */
     public CDrawGUI() {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
         setIconImage(icon.getImage());
     }
 
+    /*
+    *establish connection with server chat window
+    */
     public CDrawGUI(String server_ip) {
         initComponents();
         try {
@@ -167,10 +173,16 @@ public class CDrawGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    *closes client chat window when clicked
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /*
+    *calls FileReceiver file
+    */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
             new FileReceiver(server_ip);
@@ -180,10 +192,17 @@ public class CDrawGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /*
+    *client writes its message here
+    */
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    /*
+    *send client message to the server
+    *display client message on client chat window
+    */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
             cmessage = jTextField1.getText();
