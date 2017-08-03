@@ -19,6 +19,11 @@ class ClientCommandsSender implements KeyListener,
     private PrintWriter writer = null;
     private Rectangle clientScreenDim = null;
 
+   /*
+   *detects the key pressing
+   *detects mouse motion and action
+   *send that action to server 
+   */
     ClientCommandsSender(Socket s, JPanel p, Rectangle r) {
         cSocket = s;
         cPanel = p;
@@ -43,6 +48,11 @@ class ClientCommandsSender implements KeyListener,
     }
 
     @Override
+    /*
+    *detects mouse motion
+    *finds x and y coordinate of mouse pointer
+    *sends that coordinate to server
+    */
     public void mouseMoved(MouseEvent e) {
         double xScale = clientScreenDim.getWidth() / cPanel.getWidth();
         System.out.println("xScale: " + xScale);
@@ -61,6 +71,10 @@ class ClientCommandsSender implements KeyListener,
     }
 
     @Override
+    /*
+    *check whether the key of mouse is pressed or not
+    *send information of pressed button to server
+    */
     public void mousePressed(MouseEvent e) {
         System.out.println("Mouse Pressed");
         writer.println(EnumCommands.PRESS_MOUSE.getAbbrev());
@@ -74,6 +88,10 @@ class ClientCommandsSender implements KeyListener,
     }
 
     @Override
+    /*
+    *check whether the key of mouse is released or not
+    *send information of released button to server
+    */
     public void mouseReleased(MouseEvent e) {
         System.out.println("Mouse Released");
         writer.println(EnumCommands.RELEASE_MOUSE.getAbbrev());
@@ -103,6 +121,11 @@ class ClientCommandsSender implements KeyListener,
     }
 
     @Override
+                
+    /*
+    *checks which key of keyword is pressed
+    *sends that information to server
+    */
     public void keyPressed(KeyEvent e) {
         System.out.println("Key Pressed");
         writer.println(EnumCommands.PRESS_KEY.getAbbrev());
@@ -111,6 +134,10 @@ class ClientCommandsSender implements KeyListener,
     }
 
     @Override
+    /*
+    *checks which key of keyword is released
+    *sends that information to server
+    */
     public void keyReleased(KeyEvent e) {
         System.out.println("Mouse Released");
         writer.println(EnumCommands.RELEASE_KEY.getAbbrev());

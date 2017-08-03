@@ -11,11 +11,17 @@ public enum EnumCommands {
     MOVE_MOUSE(5);
 
     private int abbrev;
-
+    
+    /*
+    *initialise abbrev variable
+    */
     EnumCommands(int abbrev) {
         this.abbrev = abbrev;
     }
 
+    /*
+    *function returns abbrev value
+    */
     public int getAbbrev() {
         return abbrev;
     }
