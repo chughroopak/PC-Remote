@@ -12,7 +12,12 @@ public class ClientHandler extends javax.swing.JFrame {
      * Creates new form ClientHandler
      */
     Socket cSocket;
-
+    
+    /*
+    *constructor used to initialise components
+    *set icon of cliend handler window
+    *calls the run function 
+    */
     public ClientHandler(Socket cSocket) {
         initComponents();
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
@@ -21,6 +26,11 @@ public class ClientHandler extends javax.swing.JFrame {
         run();
     }
 
+    /*
+    *receive screenshots from server 
+    *display display screenshots of server side on client handler window
+    *initialise ClientScreenReceiver and ClientCommandsSender file
+    */
     public void run() {
         //used to represent client screen size
         Rectangle clientScreenDim = null;
