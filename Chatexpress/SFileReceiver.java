@@ -6,9 +6,9 @@
 package Chatexpress;
 
 import java.io.*;
-import java.net.*;
-import javax.swing.JFrame;
+import java.net.*;import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileSystemView;
 /**
  *
  * @author Archit Garg
@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 public class SFileReceiver extends Thread {
     Socket s;
     String server_ip;
-    DataInputStream dis,dis1;
-    PrintWriter pw;
-     JFrame f;
+    DataInputStream dis;
+    String file;
+    JFrame f;
      ServerSocket ss;
  
     /**constructor
@@ -30,20 +30,18 @@ public class SFileReceiver extends Thread {
             ss=new ServerSocket(2800);
             s=ss.accept();
             dis=new DataInputStream(s.getInputStream());
-            DataOutputStream dout=new DataOutputStream(s.getOutputStream());
+             DataOutputStream dout=new DataOutputStream(s.getOutputStream());
             int a=JOptionPane.showConfirmDialog(f=new JFrame(),"Do you want to receive file?");
             if(a==JOptionPane.YES_OPTION){
             dout.writeInt(8);
             dout.flush();
             String s2=dis.readUTF();
-            FileWriter fw=new FileWriter(s2);
-            pw=new PrintWriter(fw);
-            
+            file = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\"+s2 ;
             start();
+            JOptionPane.showMessageDialog(null,"File recieved at:\n"+file);
             }
             if(a==JOptionPane.NO_OPTION){
             f.dispose();
-            
             dout.writeInt(7);
             dout.flush();
             }
@@ -56,21 +54,36 @@ public class SFileReceiver extends Thread {
     *used to accept file data from client
     */
     public void run(){
-        String str="";
-                try{
-                    dis1=new DataInputStream(s.getInputStream());
-                    
-                    do{
-                    
-                    str=dis1.readUTF();
-                    pw.println(str);
-                    pw.flush();
-                    
-                    }while(str!=null);
-                    JOptionPane.showMessageDialog(new JFrame(),"file received");
-                }catch(Exception e){
-                System.out.println(e);
-                    }
+        try{
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = s.getInputStream();
+            } catch (IOException ex) {
+                System.out.println("Can't get socket input stream. ");
+            }
+
+            try {
+                out = new FileOutputStream(file);
+            } catch (FileNotFoundException ex) {
+                System.out.println("File not found.");
+            }
+
+            byte[] bytes = new byte[8192];
+
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+                out.write(bytes, 0, count);
+            }
+
+            out.close();
+            in.close();
+            s.close();
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
                 
     }
 }
