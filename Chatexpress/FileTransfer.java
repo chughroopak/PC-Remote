@@ -1,5 +1,6 @@
 package Chatexpress;
 
+import java.awt.HeadlessException;
 import javax.swing.JFileChooser;
 import java.io.*;
 import java.net.*;
@@ -7,9 +8,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+
 public class FileTransfer extends javax.swing.JFrame {
       Socket s;
-      DataOutputStream dout,dout1;
+      DataOutputStream dout;
       String s1=new String();
       File f;
       String s2="";
@@ -17,7 +19,7 @@ public class FileTransfer extends javax.swing.JFrame {
       JFileChooser jfc;
       
        /*
-     *set iceon on file transfer window
+     *set icon on file transfer window
      *create server socket for connecting to client file receiver
      */
      
@@ -26,11 +28,10 @@ public class FileTransfer extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/Startup/img/icon.png"));
         setIconImage(icon.getImage());
         try{
-            JOptionPane.showMessageDialog(new JFrame(),"waiting for client to accept request");
             ss=new ServerSocket(2700);
+            JOptionPane.showMessageDialog(new JFrame(),"waiting for client to accept request");
             s=ss.accept();
             dout=new DataOutputStream(s.getOutputStream());
-            dout1=new DataOutputStream(s.getOutputStream());
             DataInputStream dis=new DataInputStream(s.getInputStream());
                int i=dis.readInt();
                if(i==7){
@@ -161,9 +162,8 @@ public class FileTransfer extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
                                                
-        s1 = jTextArea1.getText();
-        jFrame1.dispose();
         fileTransfer(s1);
+        dispose();
     }
 
       /*
@@ -174,24 +174,23 @@ public class FileTransfer extends javax.swing.JFrame {
   public void fileTransfer(String s1){
            try{
                
-               dout.writeUTF(s1);
-               dout.flush();
-               s2=f.getAbsolutePath();
-               FileReader fr=new FileReader(s2);
-               BufferedReader br=new BufferedReader(fr);
-               String s3="";
-               do{
-                   s3=br.readLine();
-                   if(s3!=null){
-                       dout1.writeUTF(s3);
-                       dout1.flush();
-                   }
-               }while(s3!=null);
-               s3="";
-                       dout1.writeUTF(s3);
-                       dout1.flush();
-               JOptionPane.showMessageDialog(new JFrame(),"file sent");
-               }catch(Exception e){
+                dout.writeUTF(s1);
+                dout.flush();
+                s2=f.getAbsolutePath();
+                byte[] bytes = new byte[8192];
+                InputStream in = new FileInputStream(f);
+                OutputStream out = s.getOutputStream();
+                int count;
+                while ((count = in.read(bytes)) > 0) {
+                    out.write(bytes, 0, count);
+                }
+
+                out.close();
+                in.close();
+                s.close();
+               JOptionPane.showMessageDialog(new JFrame(),"File Sent");
+               
+               }catch(HeadlessException | IOException e){
                e.printStackTrace();
            }
        }
