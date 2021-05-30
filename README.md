@@ -1,4 +1,5 @@
-    Project introduction on ‘Remote PC’ using Java
+## PC-Remote
+### This project is not maintained anymore. The project was developed in 2017 and can hold some potential issues with new java versions. 
 
 Technology Used:-
     
